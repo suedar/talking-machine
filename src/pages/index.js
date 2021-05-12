@@ -1,12 +1,15 @@
 
 import React, { useState, useEffect } from 'react';
 
+import beforeImg from '../assets/before.svg';
+import afterImg from '../assets/after.svg';
+
 import './index.less';
 
 export default () => {
   const newRecognition = new window.webkitSpeechRecognition();
-  const [talkList, setTalkList] = useState([
-  ]);
+  const [talkList, setTalkList] = useState([]);
+  const [isListening, setIsListening] = useState(false);
   newRecognition.continuous = true;
 
   newRecognition.onresult = async function (event) {
@@ -32,12 +35,14 @@ export default () => {
   useEffect(() => {
     window.onkeydown = function (e) {
       if (e.code === 'ShiftLeft') {
+        setIsListening(true);
         newRecognition.stop();
         newRecognition.start();
       }
     };
     window.onkeyup = function (e) {
       if (e.code === 'ShiftLeft') {
+        setIsListening(false);
         newRecognition.stop();
       }
     };
@@ -45,8 +50,12 @@ export default () => {
   return <div className="container">
     <header>按 左-shift 键对话</header>
     <div className="content">
-      {talkList.map(item => <div>{ item }</div>)}
+      {talkList.map(item => <div>
+        <span className="dialog">{ item }</span>
+      </div>)}
     </div>
-    <footer></footer>
+    <footer>
+      <img src={isListening ? afterImg : beforeImg} alt="" />
+    </footer>
   </div>;
 }
