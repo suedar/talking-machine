@@ -15,21 +15,21 @@ export default () => {
   newRecognition.onresult = async function (event) {
     console.log(event.results[0][0].transcript, 'onresult');
     const result = event.results[0][0].transcript;
-    setTalkList([...talkList, result]);
-    const reply = await fetch(
-      `http://api.qingyunke.com/api.php?key=free&appid=0&msg=${result}`,
+    setTalkList((t) => [...t, result]);
+    const res = await fetch(
+      `/api?key=free&appid=0&msg=${result}`,
       {
         headers: {
-          'Access-Control-Allow-Origin': 'no-cors'
+          'Access-Control-Allow-Origin': 'no-cors',
+          'Access-Control-Allow-Origin': 'http://localhost',
+          Origin: 'api.qingyunke.com'
         }
       }
     );
-    console.log(reply);
-    // const utterThis = new window.SpeechSynthesisUtterance(
-    //   '对不起, 我不知道您在说什么'
-    // );
-    // window.speechSynthesis.speak(utterThis);
-    // setTalkList([...talkList, reply]);
+    const reply = (await res.json()).content;
+    const utterThis = new window.SpeechSynthesisUtterance(reply);
+    window.speechSynthesis.speak(utterThis);
+    setTalkList((t) => [...t, reply]);
   };
 
   useEffect(() => {
