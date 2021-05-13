@@ -33,6 +33,9 @@ export default () => {
   };
 
   useEffect(() => {
+
+    const utterThis = new window.SpeechSynthesisUtterance('你好');
+    window.speechSynthesis.speak(utterThis);
     window.onkeydown = function (e) {
       if (e.code === 'ShiftLeft') {
         setIsListening(true);

@@ -1,70 +1,64 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+首先你要知道两个概念语音识别 🦄 与语音合成 🐲。
 
-## Available Scripts
+> 语音识别: 语音识别（speech recognition）技术，也被称为自动语音识别（英语：Automatic Speech Recognition, ASR）、电脑语音识别（英语：Computer Speech Recognition）或是语音转文本识别（英语：Speech To Text, STT），其目标是以电脑自动将人类的语音内容转换为相应的文字。与说话人识别及说话人确认不同，后者尝试识别或确认发出语音的说话人而非其中所包含的词汇内容。
 
-In the project directory, you can run:
+> 语音合成: 语音合成是将人类语音用人工的方式所产生。若是将电脑系统用在语音合成上，则称为语音合成器，而语音合成器可以用软/硬件所实现。文字转语音（Text-To-Speech，TTS）系统则是将一般语言的文字转换为语音，其他的系统可以描绘语言符号的表示方式，就像音标转换至语音一样。
+> 而合成后的语音则是利用在数据库内的许多已录好的语音连接起来。系统则因为储存的语音单元大小不同而有所差异，若是要储存 phone 以及 diphone 的话，系统必须提供大量的储存空间，但是在语意上或许会不清楚。而用在特定的使用领域上，储存整字或整句的方式可以达到高品质的语音输出。另外，包含了声道模型以及其他的人类声音特征参数的合成器则可以创造出完整的合成声音输出。
+(以上来自维基百科)
 
-### `yarn start`
+简单来说，就是`语音识别`讲语音转化为文字，而`语音合成`将文字转化为语音，
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 1. 语音识别
+语音识别的接口为 [`SpeechRecognition`](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API/Using_the_Web_Speech_API)。目前的支持不是很完善，需要加上`webkit`前缀。
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+目前的支持情况在 [`caniuse`](https://caniuse.com/) 还未更新，可以看看这个 [`issue`](https://github.com/Fyrd/caniuse/issues/4196)。
 
-### `yarn test`
+使用方式为：
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+``` js
+const newRecognition = new window.webkitSpeechRecognition();
+newRecognition.continuous = true;
+newRecognition.start();
+newRecognition.onresult = async function (event) {
+  console.log(event.results[0][0].transcript, 'onresult');
+};
+```
 
-### `yarn build`
+### 2. 语音合成
+语音识别的接口为 [`SpeechSynthesisUtterance`](https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisUtterance)。
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+目前的支持程度如下
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/dde8d9e4438e4778a7d0af2b4a1b017e~tplv-k3u1fbpfcp-watermark.image)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+需要注意的是，由于该功能被滥用（忽然觉得可以做个鬼屋网站），需要前置的用户行为才能调用该`api`，可以戳[这里](https://www.chromestatus.com/feature/5687444770914304)看看为什么。
 
-### `yarn eject`
+![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/845aa3b076ff4cf191b5cd4b43d444c1~tplv-k3u1fbpfcp-watermark.image)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![image.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2af4d31949ca46db99d3f5a91635ba9c~tplv-k3u1fbpfcp-watermark.image)
+使用方式为：
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+``` js
+const utterThis = new window.SpeechSynthesisUtterance(‘雷猴啊朋友’);
+window.speechSynthesis.speak(utterThis);
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### 3. 语音助手
+以上两个功能结合起来，就可以做一个语音助手啦。
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![emvwx-azats.gif](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/efd31d67d5e34dc194fd779956e87f7a~tplv-k3u1fbpfcp-watermark.image)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+结合[青云客的接口](http://api.qingyunke.com/)做了个线上 `demo` , 请戳👇[这里](https://suedar.github.io/talk/)查看。
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+`Github` 地址为: https://github.com/suedar/talk
 
-### Analyzing the Bundle Size
+=- The End -=
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+![](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1610d6ca163d4000aaec5a5ee4b4400d~tplv-k3u1fbpfcp-watermark.image)
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
