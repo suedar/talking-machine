@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/static/css/main.c41527f9.chunk.css",
-    "main.js": "/static/js/main.852f49ee.chunk.js",
-    "main.js.map": "/static/js/main.852f49ee.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.7acf8c16.js",
-    "runtime-main.js.map": "/static/js/runtime-main.7acf8c16.js.map",
-    "static/js/2.02083c75.chunk.js": "/static/js/2.02083c75.chunk.js",
-    "static/js/2.02083c75.chunk.js.map": "/static/js/2.02083c75.chunk.js.map",
-    "static/js/3.f3bae6bb.chunk.js": "/static/js/3.f3bae6bb.chunk.js",
-    "static/js/3.f3bae6bb.chunk.js.map": "/static/js/3.f3bae6bb.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/main.c41527f9.chunk.css.map": "/static/css/main.c41527f9.chunk.css.map",
-    "static/js/2.02083c75.chunk.js.LICENSE.txt": "/static/js/2.02083c75.chunk.js.LICENSE.txt",
-    "static/media/after.fa0a9289.svg": "/static/media/after.fa0a9289.svg",
-    "static/media/before.4ce516a4.svg": "/static/media/before.4ce516a4.svg"
+    "main.css": "/talk/static/css/main.c41527f9.chunk.css",
+    "main.js": "/talk/static/js/main.852f49ee.chunk.js",
+    "main.js.map": "/talk/static/js/main.852f49ee.chunk.js.map",
+    "runtime-main.js": "/talk/static/js/runtime-main.15c81f58.js",
+    "runtime-main.js.map": "/talk/static/js/runtime-main.15c81f58.js.map",
+    "static/js/2.02083c75.chunk.js": "/talk/static/js/2.02083c75.chunk.js",
+    "static/js/2.02083c75.chunk.js.map": "/talk/static/js/2.02083c75.chunk.js.map",
+    "static/js/3.f3bae6bb.chunk.js": "/talk/static/js/3.f3bae6bb.chunk.js",
+    "static/js/3.f3bae6bb.chunk.js.map": "/talk/static/js/3.f3bae6bb.chunk.js.map",
+    "index.html": "/talk/index.html",
+    "static/css/main.c41527f9.chunk.css.map": "/talk/static/css/main.c41527f9.chunk.css.map",
+    "static/js/2.02083c75.chunk.js.LICENSE.txt": "/talk/static/js/2.02083c75.chunk.js.LICENSE.txt",
+    "static/media/after.fa0a9289.svg": "/talk/static/media/after.fa0a9289.svg",
+    "static/media/before.4ce516a4.svg": "/talk/static/media/before.4ce516a4.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.7acf8c16.js",
+    "static/js/runtime-main.15c81f58.js",
     "static/js/2.02083c75.chunk.js",
     "static/css/main.c41527f9.chunk.css",
     "static/js/main.852f49ee.chunk.js"
